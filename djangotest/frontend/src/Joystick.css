@@ -1,0 +1,60 @@
+.joystick-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  
+  .joystick-horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .joystick-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px; 
+    cursor: pointer;
+    user-select: none; 
+    transition: background-color 0.2s; 
+  }
+  
+  /* Spezifische Farben für jede Richtung */
+  .joystick-button[data-direction='up'] {
+    background-color: #ff9999;  /* Hellrot */
+  }
+  
+  .joystick-button[data-direction='up'].active {
+    background-color: #ff3333;  /* Dunkelrot */
+  }
+  
+  .joystick-button[data-direction='down'] {
+    background-color: #9999ff;  /* Hellblau */
+  }
+  
+  .joystick-button[data-direction='down'].active {
+    background-color: #3333ff;  /* Dunkelblau */
+  }
+  
+  .joystick-button[data-direction='left'] {
+    background-color: #99ff99;  /* Hellgrün */
+  }
+  
+  .joystick-button[data-direction='left'].active {
+    background-color: #33ff33;  /* Dunkelgrün */
+  }
+  
+  .joystick-button[data-direction='right'] {
+    background-color: #ffff99;  /* Hellgelb */
+  }
+  
+  .joystick-button[data-direction='right'].active {
+    background-color: #ffff33;  /* Dunkelgelb */
+  }
+  

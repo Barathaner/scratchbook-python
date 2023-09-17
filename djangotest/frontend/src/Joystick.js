@@ -35,7 +35,8 @@ class Joystick extends Component {
     this.sendDirection(event, false);
   }
 
-onTouchEnd = (direction,event) => {
+handleTouchEnd = (direction,event) => {
+    console.log("touchend");
     if (event) {
         event.preventDefault();
         if (event.changedTouches) {
@@ -49,7 +50,8 @@ onTouchEnd = (direction,event) => {
       this.socket.send(JSON.stringify({ direction, isPressed: false }));
     }
 
-onTouchStart = (direction,event) => {
+handleTouchStart = (direction,event) => {
+    console.log("touchstart");
     if (event) {
         event.preventDefault();
         // Für Touch-Events verwenden Sie changedTouches anstelle von touches
@@ -98,7 +100,13 @@ onTouchStart = (direction,event) => {
     this.socket.send(JSON.stringify({ direction, isPressed: false }));
   }
   
-  
+  handleClick = (direction) => {
+    this.sendDirection(direction, true); // simulate pressing the button
+    setTimeout(() => {
+        this.sendDirection(direction, false); // simulate releasing the button after a short delay
+    }, 100); // 100ms delay to mimic a quick press and release
+}
+
 sendDirection = (event, isPressed) => {
     let direction;
     switch (event.keyCode) {
@@ -123,6 +131,7 @@ renderButton(direction, label) {
   onMouseUp={(e) => this.handleMouseUp(direction, e)}
   onTouchStart={(e) => this.handleMouseDown(direction, e)}
   onTouchEnd={(e) => this.handleMouseUp(direction, e)}
+  onClick={() => this.handleClick(direction)}
 >
   {label}
 </div>

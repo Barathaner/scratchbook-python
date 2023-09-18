@@ -129,8 +129,8 @@ renderButton(direction, label) {
   data-direction={direction}
   onMouseDown={(e) => this.handleMouseDown(direction, e)}
   onMouseUp={(e) => this.handleMouseUp(direction, e)}
-  onTouchStart={(e) => this.handleMouseDown(direction, e)}
-  onTouchEnd={(e) => this.handleMouseUp(direction, e)}
+  onTouchStart={(e) => this.handleTouchStart(direction, e)}
+  onTouchEnd={(e) => this.handleTouchEnd(direction, e)}
   onClick={() => this.handleClick(direction)}
 >
   {label}

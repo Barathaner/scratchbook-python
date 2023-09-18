@@ -35,7 +35,7 @@ try:
 
         im = Image.frombuffer('RGB', (bmpinfo['bmWidth'], bmpinfo['bmHeight']), bmpstr, 'raw', 'BGRX', 0, 1)
         frame = cv2.cvtColor(np.array(im), cv2.COLOR_RGB2BGR)
-
+        print(frame.shape)
         out.write(frame)
         
         # Ressourcen für diesen Frame freigeben

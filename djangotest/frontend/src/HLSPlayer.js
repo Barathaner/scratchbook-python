@@ -4,6 +4,7 @@ import 'video.js/dist/video-js.css';
 function HLSPlayer({ src }) {
     const videoRef = useRef(null);
     const playerRef = useRef(null);
+    
 
     useEffect(() => {
         if (!videoRef.current) return;

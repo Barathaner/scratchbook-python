@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<VehicleInfoPrinter>
+<controlledVehicle>
+	<fullName>DEUTZ-FAHR TopLiner 4090H</fullName>
+	<price>129500</price>
+	<lastSpeed>0.11280160595171</lastSpeed>
+</controlledVehicle>
+<playerPosition x='0' y='-200' z='0' rotation='1.5707963267949' />
+</VehicleInfoPrinter>

@@ -5,7 +5,7 @@ function JsonReader() {
   const [ws, setWs] = useState(null);
 
   useEffect(() => {
-    const websocket = new WebSocket('ws://localhost:8000/ws/xmlparser/');
+    const websocket = new WebSocket('ws://93.206.9.167:8000/ws/xmlparser/');
 
     websocket.onopen = () => {
       console.log('WebSocket Client Connected');
@@ -13,6 +13,7 @@ function JsonReader() {
 
     websocket.onmessage = (message) => {
       const parsedData = JSON.parse(message.data);
+      console.log(parsedData);
       setData(parsedData);
     };
 

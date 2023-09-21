@@ -8,7 +8,6 @@ function WebSocketImage() {
 
     socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
-        console.log(data.image);
         setImageSrc(`data:image/jpeg;base64,${data.image}`);
     };
 

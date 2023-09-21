@@ -13,6 +13,7 @@ function JsonReader() {
 
     websocket.onmessage = (message) => {
       const parsedData = JSON.parse(message.data);
+      console.log(parsedData);
       setData(parsedData);
     };
 

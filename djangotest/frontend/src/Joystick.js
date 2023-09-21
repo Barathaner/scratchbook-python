@@ -11,7 +11,7 @@ class Joystick extends Component {
   }
 
   componentDidMount() {
-    this.socket = new WebSocket('ws://93.206.3.157:8000/ws/joystick/'); // Adresse Ihres Django-Servers
+    this.socket = new WebSocket('ws://localhost:8000/ws/joystick/'); // Adresse Ihres Django-Servers
 
     this.socket.onmessage = (e) => {
       const data = JSON.parse(e.data);

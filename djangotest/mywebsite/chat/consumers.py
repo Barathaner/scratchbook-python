@@ -14,6 +14,7 @@ from ctypes import windll
 from PIL import Image
 import numpy as np
 import threading
+import xml.etree.ElementTree as ET
 
 global current_x,current_y
 j = pyvjoy.VJoyDevice(1)
@@ -134,4 +135,46 @@ class ScreenCaptureConsumer(WebsocketConsumer):
 
     def receive(self, text_data):
         # ... Rest des Codes bleibt unverändert
+        pass
+    
+    
+class XmlParserConsumer(WebsocketConsumer):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.connected = True
+
+    def sendXmlData(self):
+        xml_path = "C:/Users/User/Documents/My Games/FarmingSimulator2022/mods/FS22_karl/VehicleInfoPrinter.xml"  # Pfad zu deiner XML-Datei
+        while self.connected:
+            try:
+                tree = ET.parse(xml_path)
+                root = tree.getroot()
+                json_data = self.xml_to_json(root)
+                self.send(text_data=json.dumps(json_data))
+                time.sleep(0.5)  # Warte 2 Sekunden vor dem nächsten Senden
+
+            except ET.ParseError:
+                # Optional: Fehlermeldung an den Client senden
+                self.send(text_data=json.dumps({"error": "Fehler beim Parsen der XML-Datei."}))
+
+    def xml_to_json(self, root):
+        data = {}
+        if root.tag == 'VehicleInfoPrinter':
+            for elem in root:
+                if elem.tag == 'controlledVehicle':
+                    data['controlledVehicle'] = {child.tag: child.text for child in elem}
+                elif elem.tag == 'playerPosition':
+                    data['playerPosition'] = {k: v for k, v in elem.attrib.items()}
+        return data
+
+    def connect(self):
+        self.accept()
+        # Startet den XML-Parser in einem separaten Thread
+        threading.Thread(target=self.sendXmlData).start()
+
+    def disconnect(self, close_code):
+        self.connected = False
+
+    def receive(self, text_data):
+        # Hier können zusätzliche Funktionen hinzugefügt werden, je nachdem, wie der Client mit dem Server interagieren soll.
         pass

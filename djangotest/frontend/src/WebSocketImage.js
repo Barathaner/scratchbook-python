@@ -4,7 +4,7 @@ function WebSocketImage() {
   const [imageSrc, setImageSrc] = useState(null);
 
   useEffect(() => {
-    const socket = new WebSocket('ws://93.206.9.167:8000/ws/screen_capture/');
+    const socket = new WebSocket('ws://localhost:8000/ws/screen_capture/');
 
     socket.onmessage = (event) => {
         const data = JSON.parse(event.data);

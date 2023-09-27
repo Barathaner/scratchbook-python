@@ -1,0 +1,21 @@
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.decomposition import LatentDirichletAllocation
+
+# Textvorverarbeitung
+def preprocess(text):
+    # Hier könnte auch Lemmatisierung, Stemming etc. hinzugefügt werden
+    return text.lower().split()
+
+texts = ["Ihr Textkorpus hier"]
+
+vectorizer = CountVectorizer(stop_words='english', tokenizer=preprocess)
+data_vectorized = vectorizer.fit_transform(texts)
+
+# LDA
+lda_model = LatentDirichletAllocation(n_components=10)  # 10 Topics
+lda_model.fit(data_vectorized)
+
+# Themen anzeigen
+for idx, topic in enumerate(lda_model.components_):
+    print(f"Topic {idx+1}:")
+    print([vectorizer.get_feature_names()[i] for i in topic.argsort()[-10:]])

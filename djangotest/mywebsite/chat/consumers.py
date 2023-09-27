@@ -18,6 +18,13 @@ import xml.etree.ElementTree as ET
 
 global current_x,current_y
 j = pyvjoy.VJoyDevice(1)
+a = 0
+
+for i in range(0, 9):
+    j = pyvjoy.VJoyDevice(i)
+    if j.get_axis(pyvjoy.HID_USAGE_X) != 0:
+        a = i
+        break
 current_x = 0x8000  # Start centered
 current_y = 0x8000  # Start centered
 incrementvalue = 0x16000  # Increment value
